@@ -6,32 +6,11 @@
 /*   By: bpace <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 15:50:57 by bpace             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/08/17 20:07:38 by hryu             ###   ########.fr       */
-=======
-/*   Updated: 2019/08/17 23:24:16 by hryu             ###   ########.fr       */
->>>>>>> 71280d72511982047b38274334f3f29c49e66471
+/*   Updated: 2019/08/18 20:51:48 by hryu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-int		checkbuff(int i, int j, t_coord *piece, int mapsize)
-{
-	int		co;
-	int		ro;
-	int		squ;
-
-	squ = 0;
-	while (++squ < 4)
-	{
-		co = j + piece[squ].col - piece[0].col;
-		ro = i + piece[squ].row - piece[0].row;
-		if (co < 0 || ro < 0 || co >= mapsize || ro >= mapsize)
-			return (0);
-	}
-	return (1);
-}
 
 int		checkspot(char **map, int i, int j, t_coord *piece)
 {
@@ -70,6 +49,21 @@ void	assignmapsquares(char **map, int i, int j, t_coord *piece)
 	}
 }
 
+void	assignmapbackup(char **map, int i, int j, t_coord *piece)
+{
+	int		co;
+	int		ro;
+	int		squ;
+
+	squ = -1;
+	while (++squ < 4)
+	{
+		co = j + piece[squ].col - piece[0].col;
+		ro = i + piece[squ].row - piece[0].row;
+		map[ro][co] = '.';
+	}
+}
+
 int		recurse(char **map, t_coord *pieces, int mapsize)
 {
 	int		i;
@@ -89,6 +83,8 @@ int		recurse(char **map, t_coord *pieces, int mapsize)
 						assignmapsquares(map, i, j, pieces);
 						if (recurse(map, pieces->next, mapsize))
 							return (1);
+						else
+							assignmapbackup(map, i, j, pieces);
 					}
 	}
 	return (0);

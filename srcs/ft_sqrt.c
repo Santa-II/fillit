@@ -6,7 +6,7 @@
 /*   By: bpace <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 16:44:25 by bpace             #+#    #+#             */
-/*   Updated: 2019/08/17 23:23:05 by hryu             ###   ########.fr       */
+/*   Updated: 2019/08/18 20:51:40 by hryu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,21 @@ void	freemap(char **map, int mapsize)
 		map[i] = 0;
 	}
 	ft_memdel((void **)&map);
+}
+
+int		checkbuff(int i, int j, t_coord *piece, int mapsize)
+{
+	int		co;
+	int		ro;
+	int		squ;
+
+	squ = 0;
+	while (++squ < 4)
+	{
+		co = j + piece[squ].col - piece[0].col;
+		ro = i + piece[squ].row - piece[0].row;
+		if (co < 0 || ro < 0 || co >= mapsize || ro >= mapsize)
+			return (0);
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bpace <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 22:37:29 by bpace             #+#    #+#             */
-/*   Updated: 2019/08/17 23:23:14 by hryu             ###   ########.fr       */
+/*   Updated: 2019/08/18 20:50:08 by hryu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void				freemap(char **map, int mapsize);
 int					getmapsize(t_coord *pieces);
 int					recurse(char **map, t_coord *pieces, int mapsize);
 void				assignmapsquares(char **map, int i, int j, t_coord *piece);
+void				assignmapbackup(char **map, int i, int j, t_coord *piece);
 t_coord				*makepieces(char *buffer, int size);
 int					fillit(const int fd);
 int					main(int argv, char **argc);
